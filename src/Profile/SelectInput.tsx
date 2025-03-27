@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Combobox, InputBase, ScrollArea, useCombobox } from '@mantine/core';
+import {IconBriefcase,IconMapPin } from '@tabler/icons-react'
 
 const SelectInput = (props: any) => {
   const combobox = useCombobox({
@@ -12,7 +13,9 @@ const SelectInput = (props: any) => {
 
   useEffect(() => {
     setData(props.options);
-  }, [props.options]);
+    setValue(props.value);
+    setSearch(props.value);
+  }, []);
 
   const exactOptionMatch = data.some((item) => item === search);
   const filteredOptions = exactOptionMatch
@@ -45,10 +48,10 @@ const SelectInput = (props: any) => {
     >
       <Combobox.Target>
         <InputBase withAsterisk 
-          leftSection ={<props.leftSection stroke={1.5}/>}
           label ={props.label}
           rightSection={<Combobox.Chevron />}
           value={search}
+          leftSection ={<props.icon />}
           onChange={(event) => {
             combobox.openDropdown();
             combobox.updateSelectedOptionIndex();
